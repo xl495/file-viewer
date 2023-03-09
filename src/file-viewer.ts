@@ -9,32 +9,22 @@ import { customElement, property } from 'lit/decorators.js'
  */
 @customElement('file-viewer')
 export class fileViewer extends LitElement {
-  @property()
-  docsHint = 'Click on the Vite and Lit logos to learn more'
 
-  @property({ type: Number , reflect : true })
-  count = 0
+  @property({ type: Array, reflect: true , attribute: 'files' })
+  files : string [] = []
 
-  @property({ type: Array, reflect: true })
-  files = []
+
+
   
 
   render() {
     return html`
-      <slot></slot>
-      <div class="card">
-        ${this.files.map((file) => { return html`<div>${file}</div>` }) }
-        <button @click=${this._onClick} part="button">
-          count is ${this.count}
-        </button>
+      <div class="file">
+        ${this.files.map((file) => { return html`<img height="30px" width="30px" src=${file} />` }) }
       </div>
-      <p class="read-the-docs">${this.docsHint}</p>
     `
   }
 
-  private _onClick() {
-    this.count++
-  }
 
   static styles = css`
     :host {
