@@ -1,6 +1,5 @@
 import { LitElement, css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import litLogo from './assets/lit.svg'
 
 /**
  * An example element.
@@ -10,30 +9,21 @@ import litLogo from './assets/lit.svg'
  */
 @customElement('file-viewer')
 export class fileViewer extends LitElement {
-  /**
-   * Copy for the read the docs hint.
-   */
   @property()
   docsHint = 'Click on the Vite and Lit logos to learn more'
 
-  /**
-   * The number of times the button has been clicked.
-   */
-  @property({ type: Number })
+  @property({ type: Number , reflect : true })
   count = 0
+
+  @property({ type: Array, reflect: true })
+  files = []
+  
 
   render() {
     return html`
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://lit.dev" target="_blank">
-          <img src=${litLogo} class="logo lit" alt="Lit logo" />
-        </a>
-      </div>
       <slot></slot>
       <div class="card">
+        ${this.files.map((file) => { return html`<div>${file}</div>` }) }
         <button @click=${this._onClick} part="button">
           count is ${this.count}
         </button>

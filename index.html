@@ -9,8 +9,16 @@
     <script type="module" src="/src/file-viewer.ts"></script>
   </head>
   <body>
-    <file-viewer>
+    <file-viewer id="content" count="10" files="[11111,2222]" >
       <h1>Vite + Lit</h1>
     </file-viewer>
+
+    <script>
+      const content = document.querySelector('#content')
+
+      setTimeout(()=>{
+        content.setAttribute('count', '20')
+      },2000)
+    </script>
   </body>
 </html>
